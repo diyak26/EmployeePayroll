@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="application.controllers.LoginController"
+            prefWidth="400" prefHeight="300"
+            style="-fx-background-color:#F8F9FA; -fx-font-family:'Segoe UI';">
+    <children>
+        <Label text="Employee Payroll System" layoutX="90" layoutY="30"
+               style="-fx-font-size:18px; -fx-font-weight:bold;"/>
+        <Label text="Username" layoutX="60" layoutY="90"/>
+        <TextField fx:id="usernameField" layoutX="150" layoutY="90" prefWidth="180"/>
+        <Label text="Password" layoutX="60" layoutY="130"/>
+        <PasswordField fx:id="passwordField" layoutX="150" layoutY="130" prefWidth="180"/>
+        <Button fx:id="loginButton" text="Login" layoutX="160" layoutY="180"
+                onAction="#handleLogin" prefWidth="80"/>
+    </children>
+</AnchorPane>

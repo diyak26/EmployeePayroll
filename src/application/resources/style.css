@@ -1,0 +1,55 @@
+/* ====== GENERAL ====== */
+.root {
+    -fx-font-family: "Segoe UI", "Roboto", sans-serif;
+    -fx-background-color: #F9FAFB;
+}
+
+/* ====== NAV BUTTONS (SIDEBAR) ====== */
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 8 12 8 12;
+    -fx-cursor: hand;
+}
+
+.nav-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 8;
+}
+
+/* ====== LOGOUT BUTTON ====== */
+.logout-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFD5D5;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.logout-button:hover {
+    -fx-background-color: rgba(255, 0, 0, 0.2);
+    -fx-background-radius: 8;
+}
+
+/* ====== FEATURE BUTTONS (MAIN AREA) ====== */
+.feature-button {
+    -fx-background-color: linear-gradient(to bottom right, #0078D7, #00A2FF);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-padding: 12 20 12 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+.feature-button:hover {
+    -fx-background-color: linear-gradient(to bottom right, #005A9E, #0088E8);
+}
+
+/* ====== LABEL STYLING ====== */
+.label {
+    -fx-font-smoothing-type: lcd;
+}

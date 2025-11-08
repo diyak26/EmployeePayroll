@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="application.controllers.DashboardController"
+            prefWidth="900" prefHeight="520"
+            stylesheets="@style.css">
+
+    <!-- ====== LEFT SIDEBAR ====== -->
+    <left>
+        <VBox spacing="20" alignment="TOP_CENTER"
+              style="-fx-background-color: linear-gradient(to bottom, #003C8F, #0078D7);
+                     -fx-padding: 30 10 30 10;">
+            <children>
+
+                <!-- App logo/title -->
+                <Label text="PAYROLL SYSTEM"
+                       style="-fx-text-fill:white; -fx-font-size:18px; -fx-font-weight:bold;"/>
+
+                <Separator prefWidth="150"/>
+
+                <!-- Navigation Buttons -->
+                <Button text="🏠  Dashboard" onAction="#goToDashboard"
+                        styleClass="nav-button"/>
+                <Button text="👤  Add Employee" onAction="#goToAddEmployee"
+                        styleClass="nav-button"/>
+                <Button text="📋  View Employees" onAction="#goToViewEmployee"
+                        styleClass="nav-button"/>
+                <Button text="💰  Salary Page" onAction="#goToSalary"
+                        styleClass="nav-button"/>
+                <Button text="🧾  Payslip" onAction="#goToPayslip"
+                        styleClass="nav-button"/>
+
+                <Separator prefWidth="150"/>
+
+                <Button text="🚪 Logout" onAction="#logout"
+                        styleClass="logout-button"/>
+
+            </children>
+        </VBox>
+    </left>
+
+    <!-- ====== TOP HEADER ====== -->
+    <top>
+        <HBox alignment="CENTER_RIGHT" spacing="15"
+              style="-fx-background-color:#F8F9FA; -fx-padding:10 25 10 25;
+                     -fx-border-color:#E0E0E0; -fx-border-width:0 0 1 0;">
+            <children>
+                <Label text="Welcome, Admin 👋"
+                       style="-fx-font-size:16px; -fx-font-weight:bold; -fx-text-fill:#333;"/>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- ====== CENTER CONTENT ====== -->
+    <center>
+        <VBox alignment="CENTER" spacing="20">
+            <children>
+                <Label text="Employee Payroll Dashboard"
+                       style="-fx-font-size:24px; -fx-font-weight:bold; -fx-text-fill:#003C8F;"/>
+                <Label text="Manage employees, calculate salaries, and generate payslips easily."
+                       style="-fx-font-size:14px; -fx-text-fill:#666;"/>
+                <Separator prefWidth="300"/>
+                <HBox spacing="25" alignment="CENTER">
+                    <children>
+                        <Button text="➕ Add Employee" onAction="#goToAddEmployee"
+                                styleClass="feature-button"/>
+                        <Button text="💼 View Employees" onAction="#goToViewEmployee"
+                                styleClass="feature-button"/>
+                        <Button text="🧾 Generate Payslip" onAction="#goToPayslip"
+                                styleClass="feature-button"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>
