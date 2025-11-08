@@ -1,81 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Rectangle?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="application.controllers.DashboardController"
-            prefWidth="900" prefHeight="520"
-            stylesheets="@style.css">
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="application.controllers.DashboardController"
+           fx:id="dashboardRoot"
+           maxWidth="Infinity" maxHeight="Infinity"
+           stylesheets="@style.css">
 
-    <!-- ====== LEFT SIDEBAR ====== -->
-    <left>
-        <VBox spacing="20" alignment="TOP_CENTER"
-              style="-fx-background-color: linear-gradient(to bottom, #003C8F, #0078D7);
-                     -fx-padding: 30 10 30 10;">
-            <children>
+    <!-- Responsive Gradient Background -->
+    <Rectangle fx:id="background"
+               style="-fx-fill: linear-gradient(to bottom right, #001B47, #0078D7);"
+               StackPane.alignment="CENTER"/>
 
-                <!-- App logo/title -->
-                <Label text="PAYROLL SYSTEM"
-                       style="-fx-text-fill:white; -fx-font-size:18px; -fx-font-weight:bold;"/>
+    <BorderPane fx:id="mainContainer">
 
-                <Separator prefWidth="150"/>
+        <!-- Sidebar -->
+        <left>
+            <VBox fx:id="sidebar" spacing="18" alignment="TOP_CENTER"
+                  prefWidth="220"
+                  style="-fx-background-color: rgba(255,255,255,0.12);
+                         -fx-background-radius: 0 15 15 0;
+                         -fx-border-color: rgba(255,255,255,0.2);
+                         -fx-border-width: 0 1 0 0;
+                         -fx-padding: 30 10 30 10;">
+                <children>
+                    <Label text="PAYROLL SYSTEM"
+                           style="-fx-text-fill:white; -fx-font-size:18px; -fx-font-weight:bold;"/>
+                    <Separator prefWidth="150"/>
+                    <Button text="🏠 Dashboard" styleClass="nav-button"/>
+                    <Button text="👤 Add Employee" onAction="#goToAddEmployee" styleClass="nav-button"/>
+                    <Button text="📋 View Employees" onAction="#goToViewEmployee" styleClass="nav-button"/>
+                    <Button text="💰 Salary Page" onAction="#goToSalary" styleClass="nav-button"/>
+                    <Button text="🧾 Payslip" onAction="#goToPayslip" styleClass="nav-button"/>
+                    <Separator prefWidth="150"/>
+                    <Button text="🚪 Logout" onAction="#logout" styleClass="logout-button"/>
+                </children>
+            </VBox>
+        </left>
 
-                <!-- Navigation Buttons -->
-                <Button text="🏠  Dashboard" onAction="#goToDashboard"
-                        styleClass="nav-button"/>
-                <Button text="👤  Add Employee" onAction="#goToAddEmployee"
-                        styleClass="nav-button"/>
-                <Button text="📋  View Employees" onAction="#goToViewEmployee"
-                        styleClass="nav-button"/>
-                <Button text="💰  Salary Page" onAction="#goToSalary"
-                        styleClass="nav-button"/>
-                <Button text="🧾  Payslip" onAction="#goToPayslip"
-                        styleClass="nav-button"/>
+        <!-- Header -->
+        <top>
+            <HBox alignment="CENTER_RIGHT" spacing="15"
+                  style="-fx-background-color: rgba(255,255,255,0.15);
+                         -fx-padding:10 25;
+                         -fx-border-color: rgba(255,255,255,0.2);
+                         -fx-border-width:0 0 1 0;">
+                <children>
+                    <Label text="Welcome, Admin 👋"
+                           style="-fx-text-fill: white; -fx-font-size:16px; -fx-font-weight:bold;"/>
+                </children>
+            </HBox>
+        </top>
 
-                <Separator prefWidth="150"/>
-
-                <Button text="🚪 Logout" onAction="#logout"
-                        styleClass="logout-button"/>
-
-            </children>
-        </VBox>
-    </left>
-
-    <!-- ====== TOP HEADER ====== -->
-    <top>
-        <HBox alignment="CENTER_RIGHT" spacing="15"
-              style="-fx-background-color:#F8F9FA; -fx-padding:10 25 10 25;
-                     -fx-border-color:#E0E0E0; -fx-border-width:0 0 1 0;">
-            <children>
-                <Label text="Welcome, Admin 👋"
-                       style="-fx-font-size:16px; -fx-font-weight:bold; -fx-text-fill:#333;"/>
-            </children>
-        </HBox>
-    </top>
-
-    <!-- ====== CENTER CONTENT ====== -->
-    <center>
-        <VBox alignment="CENTER" spacing="20">
-            <children>
-                <Label text="Employee Payroll Dashboard"
-                       style="-fx-font-size:24px; -fx-font-weight:bold; -fx-text-fill:#003C8F;"/>
-                <Label text="Manage employees, calculate salaries, and generate payslips easily."
-                       style="-fx-font-size:14px; -fx-text-fill:#666;"/>
-                <Separator prefWidth="300"/>
-                <HBox spacing="25" alignment="CENTER">
-                    <children>
-                        <Button text="➕ Add Employee" onAction="#goToAddEmployee"
-                                styleClass="feature-button"/>
-                        <Button text="💼 View Employees" onAction="#goToViewEmployee"
-                                styleClass="feature-button"/>
-                        <Button text="🧾 Generate Payslip" onAction="#goToPayslip"
-                                styleClass="feature-button"/>
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
-    </center>
-
-</BorderPane>
+        <!-- Dashboard Cards -->
+        <center>
+            <GridPane alignment="CENTER" hgap="25" vgap="25" style="-fx-padding: 0 0 0 230;">
+                <children>
+                    <VBox spacing="8" styleClass="glass-card" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                        <Label text="👤 Employees" styleClass="card-title"/>
+                        <Label text="24" styleClass="card-value"/>
+                    </VBox>
+                    <VBox spacing="8" styleClass="glass-card" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                        <Label text="💰 Salaries" styleClass="card-title"/>
+                        <Label text="₹2.4L" styleClass="card-value"/>
+                    </VBox>
+                    <VBox spacing="8" styleClass="glass-card" GridPane.rowIndex="0" GridPane.columnIndex="2">
+                        <Label text="🧾 Payslips" styleClass="card-title"/>
+                        <Label text="47" styleClass="card-value"/>
+                    </VBox>
+                </children>
+            </GridPane>
+        </center>
+    </BorderPane>
+</StackPane>
