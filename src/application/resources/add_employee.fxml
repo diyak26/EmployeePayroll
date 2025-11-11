@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="application.controllers.AddEmployeeController"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@style.css">
+
+    <!-- Title Label -->
+    <children>
+        <Label text="Add Employee"
+               layoutX="230" layoutY="40"
+               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1e3a5f;" />
+
+        <!-- Employee ID -->
+        <Label text="Employee ID:" layoutX="120" layoutY="100"
+               style="-fx-font-size: 14px;" />
+        <TextField fx:id="txtEmpId"
+                   layoutX="250" layoutY="95"
+                   prefWidth="220"
+                   promptText="Enter Employee ID" />
+
+        <!-- Employee Name -->
+        <Label text="Employee Name:" layoutX="120" layoutY="150"
+               style="-fx-font-size: 14px;" />
+        <TextField fx:id="txtEmpName"
+                   layoutX="250" layoutY="145"
+                   prefWidth="220"
+                   promptText="Enter Employee Name" />
+
+        <!-- Department -->
+        <Label text="Department:" layoutX="120" layoutY="200"
+               style="-fx-font-size: 14px;" />
+        <TextField fx:id="txtDepartment"
+                   layoutX="250" layoutY="195"
+                   prefWidth="220"
+                   promptText="Enter Department" />
+
+        <!-- Salary -->
+        <Label text="Salary:" layoutX="120" layoutY="250"
+               style="-fx-font-size: 14px;" />
+        <TextField fx:id="txtSalary"
+                   layoutX="250" layoutY="245"
+                   prefWidth="220"
+                   promptText="Enter Salary" />
+
+        <!-- Save and Cancel Buttons -->
+        <HBox layoutX="220" layoutY="310" spacing="20" alignment="CENTER">
+            <children>
+                <Button fx:id="btnSave"
+                        text="Save Employee"
+                        onAction="#saveEmployee" />
+                <Button fx:id="btnCancel"
+                        text="Cancel"
+                        onAction="#cancelEmployee" />
+            </children>
+        </HBox>
+    </children>
+
+</AnchorPane>

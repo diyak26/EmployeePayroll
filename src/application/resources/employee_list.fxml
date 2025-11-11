@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="application.controllers.EmployeeListController"
+            stylesheets="@style.css"
+            prefWidth="800" prefHeight="550">
+
+    <children>
+
+        <!-- Title -->
+        <Label text="Employee List"
+               layoutX="305" layoutY="20"
+               style="-fx-font-size: 26px; -fx-font-weight: bold;" />
+
+        <!-- DELETE button -->
+        <Button text="Delete Selected"
+                fx:id="btnDelete"
+                layoutX="120" layoutY="80"
+                prefWidth="150"
+                onAction="#deleteEmployee" />
+
+        <!-- SALARY SLIP button -->
+        <Button text="View Salary Slip"
+                fx:id="btnSlip"
+                layoutX="330" layoutY="80"
+                prefWidth="150"
+                onAction="#openSalarySlip" />
+
+        <!-- ADD button -->
+        <Button text="+ Add Employee"
+                fx:id="btnAdd"
+                layoutX="540" layoutY="80"
+                prefWidth="150"
+                onAction="#openAddEmployee" />
+
+        <!-- Employee Table -->
+        <TableView fx:id="tableEmployees"
+                   layoutX="50"
+                   layoutY="140"
+                   prefWidth="700"
+                   prefHeight="350">
+
+            <columns>
+
+                <TableColumn fx:id="colId"
+                             text="ID"
+                             prefWidth="70" />
+
+                <TableColumn fx:id="colName"
+                             text="Name"
+                             prefWidth="120" />
+
+                <TableColumn fx:id="colDept"
+                             text="Department"
+                             prefWidth="120" />
+
+                <TableColumn fx:id="colBasic"
+                             text="Basic Salary"
+                             prefWidth="100" />
+
+                <TableColumn fx:id="colDA"
+                             text="DA"
+                             prefWidth="70" />
+
+                <TableColumn fx:id="colHRA"
+                             text="HRA"
+                             prefWidth="70" />
+
+                <TableColumn fx:id="colPF"
+                             text="PF"
+                             prefWidth="70" />
+
+                <TableColumn fx:id="colGross"
+                             text="Gross Salary"
+                             prefWidth="100" />
+
+                <TableColumn fx:id="colNet"
+                             text="Net Salary"
+                             prefWidth="100" />
+
+            </columns>
+
+        </TableView>
+
+    </children>
+
+</AnchorPane>
