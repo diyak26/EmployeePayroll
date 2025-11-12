@@ -4,101 +4,66 @@ import javafx.beans.property.*;
 
 public class Employee {
 
-    private final IntegerProperty id = new SimpleIntegerProperty();
-    private final StringProperty name = new SimpleStringProperty();
-    private final StringProperty department = new SimpleStringProperty();
-    private final DoubleProperty basicSalary = new SimpleDoubleProperty();
+    private final StringProperty id;
+    private final StringProperty name;
+    private final StringProperty department;
+    private final DoubleProperty basicSalary;
+    private final DoubleProperty da;
+    private final DoubleProperty hra;
+    private final DoubleProperty pf;
+    private final DoubleProperty gross;
+    private final DoubleProperty net;
 
-    private final DoubleProperty da = new SimpleDoubleProperty();
-    private final DoubleProperty hra = new SimpleDoubleProperty();
-    private final DoubleProperty pf = new SimpleDoubleProperty();
-    private final DoubleProperty gross = new SimpleDoubleProperty();
-    private final DoubleProperty net = new SimpleDoubleProperty();
-
-    public Employee() {}
-
-    public Employee(int id, String name, String dept, double basic) {
-        this.id.set(id);
-        this.name.set(name);
-        this.department.set(dept);
-        this.basicSalary.set(basic);
-
-        calculateSalary();
+    public Employee(String id, String name, String department,
+                    double basicSalary, double da, double hra,
+                    double pf, double gross, double net) {
+        this.id = new SimpleStringProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.department = new SimpleStringProperty(department);
+        this.basicSalary = new SimpleDoubleProperty(basicSalary);
+        this.da = new SimpleDoubleProperty(da);
+        this.hra = new SimpleDoubleProperty(hra);
+        this.pf = new SimpleDoubleProperty(pf);
+        this.gross = new SimpleDoubleProperty(gross);
+        this.net = new SimpleDoubleProperty(net);
     }
 
-    // -------------------------
-    // SALARY CALCULATIONS
-    // -------------------------
-    public void calculateSalary() {
-        double daVal = basicSalary.get() * 0.10;
-        double hraVal = basicSalary.get() * 0.15;
-        double pfVal = basicSalary.get() * 0.12;
-
-        double grossSalary = basicSalary.get() + daVal + hraVal;
-        double netSalary = grossSalary - pfVal;
-
-        da.set(daVal);
-        hra.set(hraVal);
-        pf.set(pfVal);
-        gross.set(grossSalary);
-        net.set(netSalary);
-    }
-
-    // -------------------------
-    // ID
-    // -------------------------
-    public int getId() { return id.get(); }
-    public void setId(int v) { id.set(v); calculateSalary(); }
-    public IntegerProperty idProperty() { return id; }
-
-    // -------------------------
-    // NAME
-    // -------------------------
-    public String getName() { return name.get(); }
-    public void setName(String v) { name.set(v); }
+    // ====================================================
+    // PROPERTY GETTERS (for TableView bindings)
+    // ====================================================
+    public StringProperty idProperty() { return id; }
     public StringProperty nameProperty() { return name; }
-
-    // -------------------------
-    // DEPT
-    // -------------------------
-    public String getDepartment() { return department.get(); }
-    public void setDepartment(String v) { department.set(v); }
     public StringProperty departmentProperty() { return department; }
-
-    // -------------------------
-    // BASIC SALARY
-    // -------------------------
-    public double getBasicSalary() { return basicSalary.get(); }
-    public void setBasicSalary(double v) { basicSalary.set(v); calculateSalary(); }
     public DoubleProperty basicSalaryProperty() { return basicSalary; }
-
-    // -------------------------
-    // DA
-    // -------------------------
-    public double getDa() { return da.get(); }
     public DoubleProperty daProperty() { return da; }
-
-    // -------------------------
-    // HRA
-    // -------------------------
-    public double getHra() { return hra.get(); }
     public DoubleProperty hraProperty() { return hra; }
-
-    // -------------------------
-    // PF
-    // -------------------------
-    public double getPf() { return pf.get(); }
     public DoubleProperty pfProperty() { return pf; }
-
-    // -------------------------
-    // GROSS
-    // -------------------------
-    public double getGross() { return gross.get(); }
     public DoubleProperty grossProperty() { return gross; }
-
-    // -------------------------
-    // NET
-    // -------------------------
-    public double getNet() { return net.get(); }
     public DoubleProperty netProperty() { return net; }
+
+    // ====================================================
+    // STANDARD VALUE GETTERS (for Controllers like SalarySlip)
+    // ====================================================
+    public String getId() { return id.get(); }
+    public String getName() { return name.get(); }
+    public String getDepartment() { return department.get(); }
+    public double getBasicSalary() { return basicSalary.get(); }
+    public double getDa() { return da.get(); }
+    public double getHra() { return hra.get(); }
+    public double getPf() { return pf.get(); }
+    public double getGross() { return gross.get(); }
+    public double getNet() { return net.get(); }
+
+    // ====================================================
+    // SETTERS (optional)
+    // ====================================================
+    public void setId(String id) { this.id.set(id); }
+    public void setName(String name) { this.name.set(name); }
+    public void setDepartment(String department) { this.department.set(department); }
+    public void setBasicSalary(double value) { this.basicSalary.set(value); }
+    public void setDa(double value) { this.da.set(value); }
+    public void setHra(double value) { this.hra.set(value); }
+    public void setPf(double value) { this.pf.set(value); }
+    public void setGross(double value) { this.gross.set(value); }
+    public void setNet(double value) { this.net.set(value); }
 }

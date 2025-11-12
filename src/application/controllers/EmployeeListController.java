@@ -15,8 +15,7 @@ import javafx.stage.Stage;
 public class EmployeeListController {
 
     @FXML private TableView<Employee> tableEmployees;
-
-    @FXML private TableColumn<Employee, Number> colId;
+    @FXML private TableColumn<Employee, String> colId;
     @FXML private TableColumn<Employee, String> colName;
     @FXML private TableColumn<Employee, String> colDept;
     @FXML private TableColumn<Employee, Number> colBasic;
@@ -26,11 +25,11 @@ public class EmployeeListController {
     @FXML private TableColumn<Employee, Number> colGross;
     @FXML private TableColumn<Employee, Number> colNet;
 
+
     private final ObservableList<Employee> employees = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-
         colId.setCellValueFactory(data -> data.getValue().idProperty());
         colName.setCellValueFactory(data -> data.getValue().nameProperty());
         colDept.setCellValueFactory(data -> data.getValue().departmentProperty());
@@ -40,20 +39,13 @@ public class EmployeeListController {
         colPF.setCellValueFactory(data -> data.getValue().pfProperty());
         colGross.setCellValueFactory(data -> data.getValue().grossProperty());
         colNet.setCellValueFactory(data -> data.getValue().netProperty());
-
         tableEmployees.setItems(employees);
     }
 
-    // ============================
-    // OPEN ADD EMPLOYEE POPUP
-    // ============================
     @FXML
     private void openAddEmployee() {
         try {
-
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/application/resources/add_employee.fxml"));
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/resources/add_employee.fxml"));
             Stage popup = new Stage();
             popup.setScene(new Scene(loader.load()));
             popup.setTitle("Add Employee");
@@ -64,21 +56,13 @@ public class EmployeeListController {
 
             Employee emp = controller.getCreatedEmployee();
             if (emp != null) employees.add(emp);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
     }
 
-    // ============================
-    // OPEN SALARY SLIP POPUP
-    // ============================
     @FXML
     private void openSalarySlip() {
         try {
-
             Employee selected = tableEmployees.getSelectionModel().getSelectedItem();
-
             if (selected == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setHeaderText("No Employee Selected");
@@ -87,9 +71,7 @@ public class EmployeeListController {
                 return;
             }
 
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/application/resources/salary_slip.fxml"));
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/resources/salary_slip.fxml"));
             Stage popup = new Stage();
             popup.setScene(new Scene(loader.load()));
             popup.setTitle("Salary Slip");
@@ -97,20 +79,13 @@ public class EmployeeListController {
 
             SalarySlipController controller = loader.getController();
             controller.setEmployee(selected);
-
             popup.show();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
     }
 
-    // ============================
-    // DELETE EMPLOYEE
-    // ============================
     @FXML
     private void deleteEmployee() {
-
         Employee selected = tableEmployees.getSelectionModel().getSelectedItem();
         if (selected == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -119,7 +94,6 @@ public class EmployeeListController {
             alert.show();
             return;
         }
-
         employees.remove(selected);
     }
 }

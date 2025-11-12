@@ -18,31 +18,18 @@ import java.io.IOException;
 
 public class LoginController {
 
-    @FXML
-    private StackPane rootPane;
-
-    @FXML
-    private VBox loginCard;
-
-    @FXML
-    private TextField usernameField;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private Button loginButton;
-
-    @FXML
-    private Rectangle background;
+    @FXML private StackPane rootPane;
+    @FXML private VBox loginCard;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private Button loginButton;
+    @FXML private Rectangle background;
 
     @FXML
     public void initialize() {
-        // Auto-resize background with window
         background.widthProperty().bind(rootPane.widthProperty());
         background.heightProperty().bind(rootPane.heightProperty());
 
-        // Animate login card on load
         loginCard.setOpacity(0);
         loginCard.setTranslateY(50);
 
@@ -57,7 +44,6 @@ public class LoginController {
         fadeIn.play();
         slideUp.play();
 
-        // Button hover zoom
         loginButton.setOnMouseEntered(e -> zoomButton(loginButton, 1.1));
         loginButton.setOnMouseExited(e -> zoomButton(loginButton, 1.0));
     }
