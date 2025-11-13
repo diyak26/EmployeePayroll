@@ -1,5 +1,6 @@
 package application.controllers;
 
+import application.dao.EmployeeDAO;  // ✅ ADD THIS
 import application.models.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +12,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public class EmployeeListController {
 
@@ -25,11 +29,11 @@ public class EmployeeListController {
     @FXML private TableColumn<Employee, Number> colGross;
     @FXML private TableColumn<Employee, Number> colNet;
 
-
     private final ObservableList<Employee> employees = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
+        // Bind columns
         colId.setCellValueFactory(data -> data.getValue().idProperty());
         colName.setCellValueFactory(data -> data.getValue().nameProperty());
         colDept.setCellValueFactory(data -> data.getValue().departmentProperty());
@@ -39,9 +43,33 @@ public class EmployeeListController {
         colPF.setCellValueFactory(data -> data.getValue().pfProperty());
         colGross.setCellValueFactory(data -> data.getValue().grossProperty());
         colNet.setCellValueFactory(data -> data.getValue().netProperty());
+
         tableEmployees.setItems(employees);
+
+        // ✅ Load from database on startup
+        loadEmployeesFromDatabase();
     }
 
+    // ==================================================
+    // Load employees from SQLite on app start
+    // ==================================================
+    private void loadEmployeesFromDatabase() {
+        employees.clear();
+        try {
+            List<Employee> list = EmployeeDAO.getAllEmployees();
+            employees.addAll(list);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Database Load Error");
+            alert.setContentText("Could not load employees from database.\n" + e.getMessage());
+            alert.show();
+        }
+    }
+
+    // ==================================================
+    // ADD EMPLOYEE
+    // ==================================================
     @FXML
     private void openAddEmployee() {
         try {
@@ -55,10 +83,18 @@ public class EmployeeListController {
             popup.showAndWait();
 
             Employee emp = controller.getCreatedEmployee();
-            if (emp != null) employees.add(emp);
+
+            if (emp != null) {
+                employees.add(emp);              // update UI list
+                EmployeeDAO.addEmployee(emp);    // ✅ save in DB
+            }
+
         } catch (Exception e) { e.printStackTrace(); }
     }
 
+    // ==================================================
+    // SALARY SLIP
+    // ==================================================
     @FXML
     private void openSalarySlip() {
         try {
@@ -84,6 +120,9 @@ public class EmployeeListController {
         } catch (Exception e) { e.printStackTrace(); }
     }
 
+    // ==================================================
+    // DELETE EMPLOYEE
+    // ==================================================
     @FXML
     private void deleteEmployee() {
         Employee selected = tableEmployees.getSelectionModel().getSelectedItem();
@@ -94,6 +133,16 @@ public class EmployeeListController {
             alert.show();
             return;
         }
-        employees.remove(selected);
+
+        try {
+            EmployeeDAO.deleteEmployee(selected.getId());  // ❗delete from DB
+            employees.remove(selected);                    // remove from UI
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Delete Failed");
+            alert.setContentText("Failed to delete employee:\n" + e.getMessage());
+            alert.show();
+        }
     }
 }

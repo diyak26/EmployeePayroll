@@ -9,7 +9,7 @@ import javafx.stage.Stage;
  * Entry point for the Employee Payroll System.
  * Starts with the Login screen.
  */
-public class Main extends Application {
+public class Main extends Application {gf
 
     @Override
     public void start(Stage stage) throws Exception {

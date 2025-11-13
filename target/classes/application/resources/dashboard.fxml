@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+
+<StackPane fx:id="dashboardRoot"
+           xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="application.controllers.DashboardController"
+           prefWidth="900" prefHeight="550">
+
+    <children>
+
+        <!-- Background -->
+        <Rectangle fx:id="background" fill="#f1f2f6"/>
+
+        <!-- Main layout: Sidebar + Content -->
+        <HBox spacing="0">
+
+            <!-- Sidebar -->
+            <VBox fx:id="sidebar"
+                  alignment="TOP_CENTER"
+                  spacing="20"
+                  prefWidth="220"
+                  style="-fx-background-color:#2f3542; -fx-padding:25;">
+                <children>
+                    <Label text="Employee Payroll"
+                           style="-fx-text-fill:white; -fx-font-size:18; -fx-font-weight:bold;"/>
+
+                    <Button text="Add Employee"
+                            onAction="#goToAddEmployee"
+                            style="-fx-background-color:#57606f; -fx-text-fill:white; -fx-cursor:hand; -fx-pref-width:160;"/>
+
+                    <Button text="View Employees"
+                            onAction="#goToViewEmployee"
+                            style="-fx-background-color:#57606f; -fx-text-fill:white; -fx-cursor:hand; -fx-pref-width:160;"/>
+
+                    <Button text="Generate Payslip"
+                            onAction="#goToPayslip"
+                            style="-fx-background-color:#57606f; -fx-text-fill:white; -fx-cursor:hand; -fx-pref-width:160;"/>
+
+                    <Button text="Logout"
+                            onAction="#logout"
+                            style="-fx-background-color:#ff4757; -fx-text-fill:white; -fx-cursor:hand; -fx-pref-width:160;"/>
+                </children>
+            </VBox>
+
+            <!-- Content Area -->
+            <StackPane alignment="CENTER" style="-fx-background-color:white;" HBox.hgrow="ALWAYS">
+                <Label text="Welcome to Employee Payroll Dashboard"
+                       style="-fx-font-size:20; -fx-text-fill:#2f3542; -fx-font-weight:bold;"/>
+            </StackPane>
+
+        </HBox>
+
+    </children>
+</StackPane>
