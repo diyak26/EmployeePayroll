@@ -47,5 +47,7 @@
                 onAction="#closeWindow"
                 styleClass="cancel-button"/>
 
+        <Button text="Download TXT" layoutX="300" layoutY="450" onAction="#downloadTextFile"/>
+
     </children>
 </AnchorPane>

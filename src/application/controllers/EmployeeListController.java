@@ -1,5 +1,8 @@
 package application.controllers;
 
+
+
+import application.controllers.SalarySlipController.*;
 import application.dao.EmployeeDAO;  // ✅ ADD THIS
 import application.models.Employee;
 import javafx.collections.FXCollections;
@@ -8,16 +11,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class EmployeeListController {
 
+
+public class EmployeeListController {
+    @FXML private Label lblId, lblName, lblDept, lblBasic, lblDa, lblHra, lblPf, lblGross, lblNet;
     @FXML private TableView<Employee> tableEmployees;
     @FXML private TableColumn<Employee, String> colId;
     @FXML private TableColumn<Employee, String> colName;
@@ -119,6 +130,86 @@ public class EmployeeListController {
 
         } catch (Exception e) { e.printStackTrace(); }
     }
+    // ==================================================
+    // DOWNLOAD SALARYSLIP
+    // ==================================================
+    @FXML
+    private void DownloadPDF() {
+        try {
+            // Choose save location
+            FileChooser chooser = new FileChooser();
+            chooser.setTitle("Save Salary Slip");
+            chooser.setInitialFileName("SalarySlip_" + lblId.getText() + ".pdf");
+            chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+
+            Stage stage = (Stage) lblId.getScene().getWindow();
+            var file = chooser.showSaveDialog(stage);
+            if (file == null) return;
+
+            // Create PDF document
+            PDDocument document = new PDDocument();
+            PDPage page = new PDPage();
+            document.addPage(page);
+
+            PDPageContentStream content = new PDPageContentStream(document, page);
+
+            // Title
+            content.beginText();
+            content.setFont(PDType1Font.HELVETICA_BOLD, 22);
+            content.newLineAtOffset(200, 750);
+            content.showText("Salary Slip");
+            content.endText();
+
+            float y = 700;
+            content.setFont(PDType1Font.HELVETICA, 12);
+
+            // Lines to write using your labels
+            String[] lines = {
+                    "Employee ID: " + lblId.getText(),
+                    "Employee Name: " + lblName.getText(),
+                    "Department: " + lblDept.getText(),
+                    "",
+                    "Basic Salary: " + lblBasic.getText(),
+                    "DA: " + lblDa.getText(),
+                    "HRA: " + lblHra.getText(),
+                    "PF: " + lblPf.getText(),
+                    "-------------------------------------------",
+                    "Gross Salary: " + lblGross.getText(),
+                    "Net Salary: " + lblNet.getText()
+            };
+
+            // Write each line to PDF
+            for (String line : lines) {
+                content.beginText();
+                content.newLineAtOffset(80, y);
+                content.showText(line);
+                content.endText();
+                y -= 20;
+            }
+
+            content.close();
+            document.save(file);
+            document.close();
+
+            // Success message
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("PDF Generated");
+            alert.setContentText("Salary Slip saved successfully!");
+            alert.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Failed to Generate");
+            alert.setContentText("Could not generate Salary Slip.");
+            alert.show();
+        }
+    }
+
+
+
 
     // ==================================================
     // DELETE EMPLOYEE
