@@ -48,9 +48,9 @@ public class DashboardController {
         fadeIn.play();
     }
 
-    // ====================================================
+
     // Navigation Methods
-    // ====================================================
+
 
     @FXML
     void goToAddEmployee(ActionEvent event) throws IOException {
@@ -72,9 +72,9 @@ public class DashboardController {
         switchScene(event, "/application/resources/login.fxml");
     }
 
-    // ====================================================
+
     // Utility: Scene Switch with Fade Animation
-    // ====================================================
+
     private void switchScene(ActionEvent event, String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
 

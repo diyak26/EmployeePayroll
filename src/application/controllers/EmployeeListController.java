@@ -61,9 +61,9 @@ public class EmployeeListController {
         loadEmployeesFromDatabase();
     }
 
-    // ==================================================
+
     // Load employees from SQLite on app start
-    // ==================================================
+
     private void loadEmployeesFromDatabase() {
         employees.clear();
         try {
@@ -78,9 +78,9 @@ public class EmployeeListController {
         }
     }
 
-    // ==================================================
+
     // ADD EMPLOYEE
-    // ==================================================
+
     @FXML
     private void openAddEmployee() {
         try {
@@ -103,9 +103,9 @@ public class EmployeeListController {
         } catch (Exception e) { e.printStackTrace(); }
     }
 
-    // ==================================================
+
     // SALARY SLIP
-    // ==================================================
+
     @FXML
     private void openSalarySlip() {
         try {
@@ -130,9 +130,9 @@ public class EmployeeListController {
 
         } catch (Exception e) { e.printStackTrace(); }
     }
-    // ==================================================
+
     // DOWNLOAD SALARYSLIP
-    // ==================================================
+
     @FXML
     private void DownloadPDF() {
         try {
@@ -211,9 +211,9 @@ public class EmployeeListController {
 
 
 
-    // ==================================================
+
     // DELETE EMPLOYEE
-    // ==================================================
+
     @FXML
     private void deleteEmployee() {
         Employee selected = tableEmployees.getSelectionModel().getSelectedItem();

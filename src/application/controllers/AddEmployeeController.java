@@ -1,7 +1,7 @@
 package application.controllers;
 
 import application.models.Employee;
-import application.dao.EmployeeDAO;     // ✅ import DAO
+import application.dao.EmployeeDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -21,9 +21,8 @@ public class AddEmployeeController {
     @FXML
     private void handleSave(ActionEvent event) {
         try {
-            // ==============================
+
             // Collect input values
-            // ==============================
             String id = txtId.getText().trim();
             String name = txtName.getText().trim();
             String dept = txtDept.getText().trim();
@@ -38,20 +37,20 @@ public class AddEmployeeController {
             double hra = Double.parseDouble(txtHRA.getText().trim());
             double pf = Double.parseDouble(txtPF.getText().trim());
 
-            // ==============================
+
             // Perform salary calculations
-            // ==============================
+
             double gross = basic + da + hra;
             double net = gross - pf;
 
-            // ==============================
+
             // Create Employee object
-            // ==============================
+
             createdEmployee = new Employee(id, name, dept, basic, da, hra, pf, gross, net);
 
-            // ==============================
+
             // Save to database (SQLite)
-            // ==============================
+
             try {
                 EmployeeDAO.addEmployee(createdEmployee);
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Employee added and saved successfully!");

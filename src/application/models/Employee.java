@@ -28,9 +28,9 @@ public class Employee {
         this.net = new SimpleDoubleProperty(net);
     }
 
-    // ====================================================
+
     // PROPERTY GETTERS (for TableView bindings)
-    // ====================================================
+
     public StringProperty idProperty() { return id; }
     public StringProperty nameProperty() { return name; }
     public StringProperty departmentProperty() { return department; }
@@ -41,9 +41,9 @@ public class Employee {
     public DoubleProperty grossProperty() { return gross; }
     public DoubleProperty netProperty() { return net; }
 
-    // ====================================================
+
     // STANDARD VALUE GETTERS (for Controllers like SalarySlip)
-    // ====================================================
+
     public String getId() { return id.get(); }
     public String getName() { return name.get(); }
     public String getDepartment() { return department.get(); }
@@ -54,9 +54,9 @@ public class Employee {
     public double getGross() { return gross.get(); }
     public double getNet() { return net.get(); }
 
-    // ====================================================
+
     // SETTERS (optional)
-    // ====================================================
+
     public void setId(String id) { this.id.set(id); }
     public void setName(String name) { this.name.set(name); }
     public void setDepartment(String department) { this.department.set(department); }

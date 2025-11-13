@@ -8,11 +8,10 @@ import java.sql.Statement;
 
 public class Database {
 
-    // ============================================================
-    // 📌 FIXED: ABSOLUTE PATH SO APP ALWAYS READS SAME DATABASE
-    // ============================================================
+
+    //  FIXED: ABSOLUTE PATH SO APP ALWAYS READS SAME DATABASE
+
     // Database will always be stored here:
-    // C:\Users\Yash\employee_payroll.db
     private static final String DB_FILE =
             System.getProperty("user.home") + File.separator + "employee_payroll.db";
 
@@ -50,9 +49,9 @@ public class Database {
         }
     }
 
-    // ============================================================
+
     // 📌 Return a connection to the same DB every time
-    // ============================================================
+
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DB_URL);
     }

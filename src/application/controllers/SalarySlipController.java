@@ -46,8 +46,8 @@ public class SalarySlipController {
     }
 
     @FXML
-    private void downloadTextFile() {
-        try {
+    private void downloadPDFFile() {
+        /*try {
             // Choose save location
             FileChooser chooser = new FileChooser();
             chooser.setTitle("Save Salary Slip Text File");
@@ -87,6 +87,69 @@ public class SalarySlipController {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error writing text file: " + e.getMessage());
             alert.show();
         }
+
+         */
+
+        try {
+            // File chooser
+            FileChooser chooser = new FileChooser();
+            chooser.setTitle("Save Salary Slip PDF");
+            chooser.setInitialFileName("SalarySlip_" + lblId.getText() + ".pdf");
+            chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+
+            Stage stage = (Stage) lblId.getScene().getWindow();
+            File file = chooser.showSaveDialog(stage);
+
+            if (file == null) return;   // user cancelled
+
+            // Create PDF
+            PDDocument document = new PDDocument();
+            PDPage page = new PDPage();
+            document.addPage(page);
+
+            PDPageContentStream content = new PDPageContentStream(document, page);
+
+            // Title
+            content.beginText();
+            content.setFont(PDType1Font.HELVETICA_BOLD, 20);
+            content.newLineAtOffset(200, 750);
+            content.showText("Salary Slip");
+            content.endText();
+
+            // Start writing text
+            int startX = 70;
+            int startY = 700;
+            int space = 30;
+
+            content.beginText();
+            content.setFont(PDType1Font.HELVETICA, 14);
+            content.newLineAtOffset(startX, startY);
+
+            content.showText("Employee ID: " + lblId.getText()); content.newLineAtOffset(0, -space);
+            content.showText("Name: " + lblName.getText()); content.newLineAtOffset(0, -space);
+            content.showText("Department: " + lblDept.getText()); content.newLineAtOffset(0, -space * 2);
+
+            content.showText("Basic Salary: " + lblBasic.getText()); content.newLineAtOffset(0, -space);
+            content.showText("HRA (10%): " + lblHra.getText()); content.newLineAtOffset(0, -space);
+            content.showText("DA (5%): " + lblDa.getText()); content.newLineAtOffset(0, -space);
+            content.showText("PF (12%): " + lblPf.getText()); content.newLineAtOffset(0, -space * 2);
+
+            content.showText("Gross Salary: " + lblGross.getText()); content.newLineAtOffset(0, -space);
+            content.showText("Net Salary: " + lblNet.getText());
+
+            content.endText();
+            content.close();
+
+            // Save PDF
+            document.save(file);
+            document.close();
+
+            new Alert(Alert.AlertType.INFORMATION, "PDF saved successfully!").show();
+
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Error generating PDF: " + e.getMessage()).show();
+        }
+
     }
 
 
