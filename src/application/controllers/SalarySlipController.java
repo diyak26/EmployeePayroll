@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 
 public class SalarySlipController {
 
-    @FXML private Label lblId, lblName, lblDept, lblBasic, lblDA, lblHRA, lblPF, lblGross, lblNet;
+    @FXML private Label lblId, lblName, lblDept, lblBasic, lblDa, lblHra, lblPf, lblGross, lblNet;
     private Employee employee;
 
     public void setEmployee(Employee emp) {
@@ -21,10 +21,17 @@ public class SalarySlipController {
         lblName.setText(employee.getName());
         lblDept.setText(employee.getDepartment());
         lblBasic.setText(String.format("%.2f", employee.getBasicSalary()));
-        lblDA.setText(String.format("%.2f", employee.getDa()));
-        lblHRA.setText(String.format("%.2f", employee.getHra()));
-        lblPF.setText(String.format("%.2f", employee.getPf()));
+        lblDa.setText(String.format("%.2f", employee.getDa()));
+        lblHra.setText(String.format("%.2f", employee.getHra()));
+        lblPf.setText(String.format("%.2f", employee.getPf()));
         lblGross.setText(String.format("%.2f", employee.getGross()));
         lblNet.setText(String.format("%.2f", employee.getNet()));
     }
+
+    @FXML
+    private void closeWindow() {
+        // get any node's window and close it
+        lblId.getScene().getWindow().hide();
+    }
+
 }
